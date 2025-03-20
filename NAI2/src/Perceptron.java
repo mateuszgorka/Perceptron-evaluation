@@ -14,30 +14,30 @@ public class Perceptron {
     public Perceptron(int dimension) {
         this.dimension = dimension;
         weights = new ArrayList<>();
-        alpha = 0.01;   // Math.random()*1;
+        alpha = Math.random()*1;
         beta = Math.random()*1;
-//        threshold = 0.5;  //Math.random()*0.5;
+        threshold = Math.random()*1;
 
 
 
         for (int i = 0; i < dimension; i++) {
-            weights.add(1 - Math.random());
+            weights.add(Math.random()*10);
         }
     }
 
 
     //  -> Obliczanie wartosci net i zwracanie wyniki funkcji aktywacji
-    public double compute(List<Double> inputs){
-        double net = MathUtils.iloczynSkalarnyLicz(inputs, weights) - threshold; // -> Iloczyn skalarny wejść i wag minus próg aktywacji
+    public int compute(List<Double> inputs){
+        double net = MateeeematyczneNarzedzia.iloczynSkalarnyLicz(inputs, weights) - threshold; // -> Iloczyn skalarny wejść i wag minus próg aktywacji
         if (net >= 0)
-            return 1.0;
-        return 0.0;
+            return 1;
+        return 0;
     }
 
 
-    public void learn(List<Double> inputs, double decision){
-        double wyjsciePerceptron = compute(inputs);  // -> obliczenie wyjscia perceptronu
-        double blad = decision - wyjsciePerceptron; // -> obliczenie błedu perceptronu
+    public void learn(List<Double> inputs, int decision){
+        int wyjsciePerceptron = compute(inputs);  // -> obliczenie wyjscia perceptronu
+        int blad = decision - wyjsciePerceptron; // -> obliczenie błedu perceptronu
 
 
         for (int i = 0; i < dimension; i++) {
@@ -47,7 +47,6 @@ public class Perceptron {
         // alpha * error * inputs.get(i) oblicza wartość korekty dla danej wagi (błąd * współczynnik uczenia * wejście)
         }
 
-
-        threshold -= alpha * blad; // tutaj aktualizujemy prog aktywacji  gdy blad = 0 to sie nie aktualizuje po prostu
+        threshold -= beta * blad; // tutaj aktualizujemy prog aktywacji
     }
 }
