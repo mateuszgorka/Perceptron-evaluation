@@ -4,37 +4,21 @@ import java.util.List;
 
 public class Main {
 
-public static void main(String[] args) {
+    public static void main(String[] args) {
 
 
+        String learnFiles = "C:\\Users\\gorka\\Downloads\\OneDrive_1_20.03.2025\\perceptron.data";
+        String testFiles = "C:\\Users\\gorka\\Downloads\\OneDrive_1_20.03.2025\\perceptron.test.data";
+        int epochs = 100;
+
+        Teacher teacher = new Teacher(learnFiles, testFiles, epochs);
+        teacher.teachPerceptron();
+        double accuracy = teacher.testPerceptron();
 
 
-    List<String> perceptronList = new ArrayList<>();
+        System.out.println("[ Accuracy " + accuracy + " % ]");
+        System.out.println();
+        teacher.printConfusionMatrix();
 
-
-    try {
-        perceptronList = read("C:\\Users\\s31289\\Downloads\\OneDrive_1_14.03.2025\\perceptron.data");
-        for (String line : perceptronList) {
-            System.out.println(line);
-        }
-    } catch (IOException e) {
-        System.err.println("Error reading file: " + e.getMessage());
-    }
-}
-
-
-
-
-    public static List<String> read(String fileName) throws FileNotFoundException, IOException {
-        List<String> data = new ArrayList<>();
-
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                data.add(line);
-            }
-        }
-
-        return data;
     }
 }
