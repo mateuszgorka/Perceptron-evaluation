@@ -1,15 +1,20 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
 
 
-        String learnFiles = "C:\\Users\\gorka\\Downloads\\OneDrive_1_20.03.2025\\perceptron.data";
-        String testFiles = "C:\\Users\\gorka\\Downloads\\OneDrive_1_20.03.2025\\perceptron.test.data";
-        int epochs = 100;
+        String learnFiles = "NAI2/perceptron.data";
+        String testFiles = "NAI2/perceptron.test.data";
+
+
+        System.out.print("Wpisz wartosc epok: ");
+        Scanner scan = new Scanner(System.in);
+        int epochs = scan.nextInt();
 
         Teacher teacher = new Teacher(learnFiles, testFiles, epochs);
         teacher.teachPerceptron();
