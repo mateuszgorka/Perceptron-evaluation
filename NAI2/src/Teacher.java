@@ -97,10 +97,10 @@ public class Teacher {
 
 
     public void printConfusionMatrix() {
-        System.out.println("Macierz Pomyłek:");
+        System.out.println("Macierz Omyłek:");
         System.out.println("------------------");
-        System.out.println("| ->       | " + confusionMatrix[0][0] + " | " + confusionMatrix[0][1] + " |" + "  |Poprawnie sklasyfikowana klasa 0|   |Zle sklasyfikowana klasa 0|");
-        System.out.println("| ->       | " + confusionMatrix[1][0] + " | " + confusionMatrix[1][1] + " |" + "  |Zle sklasyfikowana klasa 1|   |Poprawnie sklasyfikowana klasa 1|");
+        System.out.println("| ->       | " + confusionMatrix[0][0] + " | " + confusionMatrix[0][1] + " |" + "  |(TruePostive) Poprawnie sklasyfikowana klasa 0|   |(FalsePositive) Zle sklasyfikowana klasa 0|");
+        System.out.println("| ->       | " + confusionMatrix[1][0] + " | " + confusionMatrix[1][1] + " |" + "  |(FalseNegative) Zle sklasyfikowana klasa 1|   |(TrueNegative) Poprawnie sklasyfikowana klasa 1|");
         System.out.println("------------------");
     }
 
