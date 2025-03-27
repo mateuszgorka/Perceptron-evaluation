@@ -95,33 +95,10 @@ public class Teacher {
         return accuracy;
     }
 
-
-    public void printConfusionMatrix() {
-        System.out.println("Macierz Omyłek:");
-        System.out.println("------------------");
-        System.out.println("| ->       | " + confusionMatrix[0][0] + " | " + confusionMatrix[0][1] + " |" + "  |(TruePostive) Poprawnie sklasyfikowana klasa 0|   |(FalsePositive) Zle sklasyfikowana klasa 0|");
-        System.out.println("| ->       | " + confusionMatrix[1][0] + " | " + confusionMatrix[1][1] + " |" + "  |(FalseNegative) Zle sklasyfikowana klasa 1|   |(TrueNegative) Poprawnie sklasyfikowana klasa 1|");
-        System.out.println("------------------");
-    }
-
-
-    public void evaluate(){
-
-        double accuracy = (double)(confusionMatrix[0][0] + confusionMatrix[1][1]) /
-                (confusionMatrix[0][0] + confusionMatrix[1][0] + confusionMatrix[0][1] + confusionMatrix[1][1]);
-
-        double precision = confusionMatrix[1][1] + confusionMatrix[0][1] != 0 ?
-                (double) confusionMatrix[1][1] / (confusionMatrix[1][1] + confusionMatrix[0][1]) : 0;
-
-        double recall = confusionMatrix[1][1] + confusionMatrix[1][0] != 0 ?
-                (double) confusionMatrix[1][1] / (confusionMatrix[1][1] + confusionMatrix[1][0]) : 0;
-
-        double f_scale = precision + recall != 0 ? (2 * precision * recall) / (precision + recall) : 0;
-
-        System.out.println("Miary Ewaluacji: ");
-        System.out.println("Accuracy [evaluation]: " + accuracy + " /jezeli wynosi 1.0 to znaczy ze perceptron nigdy blednie nie przewidzial klasy 1");
-        System.out.println("Precision [evaluation]: " + precision);
-        System.out.println("Recall [evaluation]: " + recall);
-        System.out.println("F-Scale [evaluation]: " + f_scale);
+    public void runEvaluator(String testFile) {
+        Evaluator evaluator = new Evaluator(testFile, perceptron, testData, confusionMatrix);
+        evaluator.printConfusionMatrix();
+        System.out.println();
+        evaluator.evaluate();
     }
 }
