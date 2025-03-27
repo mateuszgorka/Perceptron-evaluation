@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Teacher {
 
@@ -10,6 +12,10 @@ public class Teacher {
 
 
     int[][] confusionMatrix;
+
+    // -> extended
+    int numericClasses;
+
 
 
 
@@ -28,7 +34,8 @@ public class Teacher {
             this.perceptron = new Perceptron(dimension);
         }
 
-        confusionMatrix = new int[2][2];   // -> inicjalizujemy macierz pomyłek i elo
+        this.numericClasses = determineQuantityofClasses();
+        confusionMatrix = new int[numericClasses][numericClasses];   // -> inicjalizujemy macierz pomyłek i elo
     }
 
     public void teachPerceptron(){
@@ -66,8 +73,8 @@ public class Teacher {
 
 
         // ----- trzeba wyzerowac macierz pomyłek przed kazdym testowaniem -------
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 2; j++) {
+        for (int i = 0; i < numericClasses; i++) {
+            for (int j = 0; j < numericClasses; j++) {
                 confusionMatrix[i][j] = 0;
             }
         }
@@ -95,9 +102,23 @@ public class Teacher {
         return accuracy;
     }
 
+    // -> tutaj udpatey
+
+
+    // -> tutaj chcemy okreslic liczbe klas na podstawie danych z (learn)
+    // mamy double poniewaz w samej mechanice wczytywania rozrozniamy rozne dane i przypisujemy ich dowartosci liczbowych
+    public int determineQuantityofClasses(){
+        Set<Double> uqnique = new HashSet<>();
+        for (List<Double> data : learnData) {
+            uqnique.add(data.getLast());
+        }
+        return uqnique.size();
+    }
+
+
+
     public void runEvaluator(String testFile) {
-        Evaluator evaluator = new Evaluator(testFile, perceptron, testData, confusionMatrix);
-        evaluator.printConfusionMatrix();
+        Evaluator evaluator = new Evaluator(testFile, perceptron, testData, confusionMatrix, determineQuantityofClasses());
         System.out.println();
         evaluator.evaluate();
     }

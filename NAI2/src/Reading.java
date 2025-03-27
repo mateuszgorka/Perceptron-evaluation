@@ -2,11 +2,25 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Reading {
 
     public static void readCSV(String filePath, List<List<Double>> dataList) {
+
+        // zamieniamy hardcodeing i essa
+
+
+        Map<String, Double> labelMap = new HashMap<String, Double>();
+        double labelNum = 0;
+
+        //--------------
+
+
+
+
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -18,14 +32,26 @@ public class Reading {
                     row.add(Double.parseDouble(data[i]));
                 }
 
-                if (data[data.length - 1].equals("Iris-versicolor")) {
-                    row.add(1.0);
-                } else {
-                    row.add(0.0);
+
+                String label = data[data.length - 1];
+                if (!labelMap.containsKey(label)) {
+                    labelMap.put(label, labelNum);
+                    labelNum++;
                 }
 
-
+                double numericLabel = labelMap.get(label);
+                row.add(numericLabel);
                 dataList.add(row);
+
+
+
+
+                // (tu byl hardcode ale nie bedzie!)
+//                if (data[data.length - 1].equals("Iris-versicolor")) {
+//                    row.add(1.0);
+//                } else {
+//                    row.add(0.0);
+//                }
 
             }
         } catch (IOException e) {
