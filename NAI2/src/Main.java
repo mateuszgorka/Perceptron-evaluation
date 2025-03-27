@@ -24,6 +24,8 @@ public class Main {
         System.out.println("[ Accuracy " + accuracy + " % ]");
         System.out.println();
         teacher.printConfusionMatrix();
+        System.out.println();
+        teacher.evaluate();
 
     }
 }

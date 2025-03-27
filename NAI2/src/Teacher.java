@@ -105,5 +105,23 @@ public class Teacher {
     }
 
 
+    public void evaluate(){
 
+        double accuracy = (double)(confusionMatrix[0][0] + confusionMatrix[1][1]) /
+                (confusionMatrix[0][0] + confusionMatrix[1][0] + confusionMatrix[0][1] + confusionMatrix[1][1]);
+
+        double precision = confusionMatrix[1][1] + confusionMatrix[0][1] != 0 ?
+                (double) confusionMatrix[1][1] / (confusionMatrix[1][1] + confusionMatrix[0][1]) : 0;
+
+        double recall = confusionMatrix[1][1] + confusionMatrix[1][0] != 0 ?
+                (double) confusionMatrix[1][1] / (confusionMatrix[1][1] + confusionMatrix[1][0]) : 0;
+
+        double f_scale = precision + recall != 0 ? (2 * precision * recall) / (precision + recall) : 0;
+
+        System.out.println("Miary Ewaluacji: ");
+        System.out.println("Accuracy [evaluation]: " + accuracy + " /jezeli wynosi 1.0 to znaczy ze perceptron nigdy blednie nie przewidzial klasy 1");
+        System.out.println("Precision [evaluation]: " + precision);
+        System.out.println("Recall [evaluation]: " + recall);
+        System.out.println("F-Scale [evaluation]: " + f_scale);
+    }
 }
