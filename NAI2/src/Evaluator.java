@@ -97,7 +97,7 @@ public class Evaluator {
 
         }
 
-            // -> teraz makro-srednia
+            // -> makro-srednia
 //            Oto jak obliczyć makro średnią:
 //            Oblicz metrykę (np. precyzję) dla każdej klasy.
 //            Zsumuj wartości metryki dla wszystkich klas.
