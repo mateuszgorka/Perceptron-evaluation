@@ -8,17 +8,7 @@ import java.util.Map;
 
 public class Reading {
 
-    public static void readCSV(String filePath, List<List<Double>> dataList) {
-
-        // zamieniamy hardcodeing i essa
-
-
-        Map<String, Double> labelMap = new HashMap<String, Double>();
-        double labelNum = 0;
-
-        //--------------
-
-
+    public static void readCSV(String filePath, List<List<Double>> dataList, Map<String, Double> labelMap) {
 
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -34,9 +24,9 @@ public class Reading {
 
 
                 String label = data[data.length - 1];
+
                 if (!labelMap.containsKey(label)) {
-                    labelMap.put(label, labelNum);
-                    labelNum++;
+                    labelMap.put(label, labelMap.isEmpty() ? 1.0 : 0.0);
                 }
 
                 double numericLabel = labelMap.get(label);

@@ -1,9 +1,8 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Teacher {
+
+
 
     Perceptron perceptron;
     List<List<Double>> learnData;
@@ -22,11 +21,13 @@ public class Teacher {
     public Teacher(String learnFile, String testFile,int epochs) {
         this.epochs = epochs;
 
+        Map<String, Double> labelMap = new HashMap<>();
+
         this.learnData = new ArrayList<>();
-        Reading.readCSV(learnFile, this.learnData);
+        Reading.readCSV(learnFile, this.learnData, labelMap);
 
         this.testData = new ArrayList<>();
-        Reading.readCSV(testFile, this.testData);
+        Reading.readCSV(testFile, this.testData, labelMap);
 
 
         if (learnData != null && !learnData.isEmpty() && learnData.get(0).size() > 1) {
@@ -35,6 +36,8 @@ public class Teacher {
         }
 
         this.numericClasses = determineQuantityofClasses();
+
+
         confusionMatrix = new int[numericClasses][numericClasses];   // -> inicjalizujemy macierz pomyłek i elo
     }
 

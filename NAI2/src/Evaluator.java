@@ -45,10 +45,10 @@ public class Evaluator {
         double f_scale = precision + recall != 0 ? (2 * precision * recall) / (precision + recall) : 0;
 
         System.out.println("Miary Ewaluacji: ");
-        System.out.println("Accuracy [evaluation]: " + accuracy);
-        System.out.println("Precision [evaluation]: " + precision + " /jezeli wynosi 1.0 to znaczy ze perceptron nigdy blednie nie przewidzial klasy 1");
-        System.out.println("Recall [evaluation]: " + recall);
-        System.out.println("F-Scale [evaluation]: " + f_scale);
+        System.out.println("Accuracy [evaluation]: " + String.format("%.2f",accuracy));
+        System.out.println("Precision [evaluation]: " + String.format("%.2f",precision) + " /jezeli wynosi 1.0 to znaczy ze perceptron nigdy blednie nie przewidzial klasy 1");
+        System.out.println("Recall [evaluation]: " + String.format("%.2f",recall));
+        System.out.println("F-Scale [evaluation]: " + String.format("%.2f",f_scale));
 
 
         System.out.println("-------------------------------");
@@ -60,6 +60,10 @@ public class Evaluator {
     }
 
 
+
+
+    // -> tu bedzie wchodzic, jezeli program wykryje wiecej klas
+    // -> jednak akutalnie nadal mamy 2 klasy gdyz pierwsza wykrywana jest jako "1" a druga i trzecia jako "0"
     public void evaluateMultiClassification() {
 
         double[] precision = new double[numericClasses];
@@ -148,16 +152,12 @@ public class Evaluator {
         // -> teraz bedziemy liczyc i ogolnie printowac macierz omylek dla (n) klas
 
 
+        System.out.println("Macierz pomyłek:");
         for (int i = 0; i < numericClasses; i++) {
-            System.out.println("| ->     |");
             for (int j = 0; j < numericClasses; j++) {
-                System.out.println(confusionMatrix[i][j]);
+                System.out.print(String.format("%5d", confusionMatrix[i][j]) + " ");
             }
+            System.out.println();
         }
-
-
-
-
-
     }
 }

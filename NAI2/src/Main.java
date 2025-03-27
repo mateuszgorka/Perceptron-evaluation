@@ -11,20 +11,24 @@ public class Main {
         String learnFiles = "perceptron.data";
         String testFiles = "perceptron.test.data";
 
+        // do testowania
+        String learnFilesMulti = "perceptron.multiple.data";
+        String testFilesMulti = "perceptron.test.multiple.data";
+
 
 //        System.out.print("Wpisz wartosc epok: ");
 //        Scanner scan = new Scanner(System.in);
 //        int epochs = scan.nextInt();
 //
         int epochs = 100;
-        Teacher teacher = new Teacher(learnFiles, testFiles, epochs);
+        Teacher teacher = new Teacher(learnFilesMulti, testFilesMulti, epochs);
         teacher.teachPerceptron();
         double accuracy = teacher.testPerceptron();
 
 
         System.out.println("[ Accuracy " + accuracy + " % ]");
         System.out.println();
-        teacher.runEvaluator(testFiles);
+        teacher.runEvaluator(testFilesMulti);
 
     }
 }
