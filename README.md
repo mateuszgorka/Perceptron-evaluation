@@ -1,1 +1,1 @@
-# Previously simple perceptron, now extended with evaluation module and multi-layer format
+Perceptron 2.0
