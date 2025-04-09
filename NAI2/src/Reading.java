@@ -26,7 +26,9 @@ public class Reading {
                 String label = data[data.length - 1];
 
                 if (!labelMap.containsKey(label)) {
-                    labelMap.put(label, labelMap.isEmpty() ? 1.0 : 0.0);
+//                    labelMap.put(label, labelMap.isEmpty() ? 1.0 : 0.0);
+                    labelMap.put(label, (double) labelMap.size());
+
                 }
 
                 double numericLabel = labelMap.get(label);

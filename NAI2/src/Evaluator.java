@@ -83,7 +83,7 @@ public class Evaluator {
             for (int j = 0; j < numericClasses; j++) {
                 if (j != i) {
                     fp += confusionMatrix[j][i];
-                    fn += confusionMatrix[j][j];
+                    fn += confusionMatrix[i][j];
                 }
                 totalClasses += confusionMatrix[j][j];
             }
