@@ -26,7 +26,7 @@ public class ProcessedText {
         double norm = 0;
 
         for (double v : counter) {
-            norm += v * v;      //    norma eukildesowa   ||v|| = sqrt(v₁² + v₂² + ... + v₂₆²))
+            norm += v * v;      //   ->>>>>>>>>>>>>>>> norma eukildesowa   ||v|| = sqrt(v₁² + v₂² + ... + v₂₆²))
         }
         norm = Math.sqrt(norm);
 

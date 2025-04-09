@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +33,38 @@ public class TeacherUpdated {
         }
 
     }
+
+
+
+    public List<DataForLanguage> loadData(String filePath) throws IOException {
+
+
+        List<DataForLanguage> data = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] tokens = line.split(",",2);
+                if (tokens.length != 2) {
+
+                    String language = tokens[0].trim().replace("\"","");
+                    String text = tokens[1].trim().replace("\"","");
+
+                    if (languageLabels.containsKey(language)) {
+                        data.add(new DataForLanguage(language, text));
+                    } else {
+                        System.out.println("Language " + language + " not found");
+                    }
+                } else {
+                    System.out.println("Language " + tokens[0].trim().replace("\"","") + " not found");
+                }
+            }
+        }
+
+        return data;
+    }
+
+
+
 
 
 
