@@ -32,7 +32,7 @@ public class Teacher {
 
         if (learnData != null && !learnData.isEmpty() && learnData.get(0).size() > 1) {
             int dimension = learnData.getFirst().size() - 1;
-            this.perceptron = new Perceptron(dimension);
+//            this.perceptron = new Perceptron(dimension); -> potrzebne do dzialania zwyczajnego perceptrona, jednak w przypadku tego -> wywalamy
         }
 
         this.numericClasses = determineQuantityofClasses();
