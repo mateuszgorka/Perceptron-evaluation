@@ -12,8 +12,8 @@ public class Main {
         String testFiles = "perceptron.test.data";
 
         // do testowania
-        String learnFilesMulti = "perceptron.multiple.data";
-        String testFilesMulti = "perceptron.test.multiple.data";
+        String learnFilesMulti = "NAI2/perceptron.multiple.data";
+        String testFilesMulti = "NAI2/perceptron.test.multiple.data";
 
 
 //        System.out.print("Wpisz wartosc epok: ");
