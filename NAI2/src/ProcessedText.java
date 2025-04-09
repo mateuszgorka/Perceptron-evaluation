@@ -40,13 +40,7 @@ public class ProcessedText {
             vector.addAll(Collections.nCopies(26,0.0));   // -> Jeśli norma == 0 (naaaa przyklad gdy tekst nie zawiera żadnej litery a-z), zwracany jest wektor zerowy ([0.0, 0.0, ..., 0.0]).
         }
 
-
-
         return vector;
+
     }
-
-
-
-
-
 }

@@ -1,10 +1,8 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.net.Socket;
+import java.util.*;
 
 public class TeacherUpdated {
 
@@ -63,6 +61,47 @@ public class TeacherUpdated {
         return data;
     }
 
+
+
+    public void trainData(List<DataForLanguage> trainingData, int epochs) throws IOException {
+
+        System.out.println("Rozpoczecie trenigu dla " + epochs + " epok");
+
+        for (int epoch = 0; epoch < epochs; epoch++) {
+
+            int erorrsInEpoch = 0;  // -> do debuggowania
+
+            //Collections.shuffle(trainingData); // -> mieszamy zeby siec nie uczyla sie kolejnosci tylko faktycznie dososowywala wagi
+
+
+
+            for (DataForLanguage data : trainingData) {
+
+                String language = data.getLanguage();
+                String text = data.getText();
+                List<Double> input =  ProcessedText.textVector(text);           // -> przetwarzamy ten tekst na wektor cech
+
+
+                int targetedIndex = languageLabels.get(language);
+
+
+                // ---------------
+                // -> Musimy przetworzyc wejscie przez KAZDY perceptron i obliczyc dla niego blad
+
+                double maxOutputForPrediction = -Double.MAX_VALUE;
+                int predictedIndexForErrorCount = -1;
+
+
+
+
+            }
+
+
+
+        }
+
+
+    }
 
 
 
