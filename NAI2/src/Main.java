@@ -35,6 +35,41 @@ public class Main {
 
 
 
+
+            // -> teraz mechanizm wpisywania recznego <>
+            System.out.println();
+            System.out.println("Testowanie reczne: ");
+            System.out.println("Wpisz exit aby zakonczyc");
+            System.out.println();
+            Scanner scan = new Scanner(System.in);
+
+
+            List<String> knownLanguages = tu.getLanguage();
+
+
+            while (true) {
+
+            System.out.print("> ");
+            String line = scan.nextLine();
+
+
+            if (("exit").equals(line)) {
+                break;
+            }
+
+            // metoda predykcji i elo
+
+            String predictedLang = tu.preditction(line);
+
+            if (knownLanguages.contains(predictedLang)) {
+                System.out.println("  Rozpoznany jezyk: " + predictedLang);
+            } else {
+                System.out.println("  Nie rozpoznano jezyka ");
+            }
+        }
+
+
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
