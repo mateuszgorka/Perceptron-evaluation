@@ -29,7 +29,6 @@ public class TeacherUpdated {
             this.languageLabels.put(languages.get(i), i);
             this.perceptrons.add(new Perceptron(inputDimension, learningRate));
         }
-
     }
 
 
@@ -128,6 +127,37 @@ public class TeacherUpdated {
     }
 
 
+
+    // -> tutaj wpisujemy ten pjedynczy tekst dostepny do wpisania dla uytkownika!!!!!
+    public String preditction(String text){
+
+        // -> tekst wejsciowy na cechy as perviously done
+        List<Double> inputV = ProcessedText.textVector(text);
+
+        double maxOut = -Double.MAX_VALUE;
+        int predictedIndex = -1;
+
+
+        // -> teraz musze przeiterowac wszystkie perceptrony
+        // -> i obliczyc aktywacje
+
+
+        for (int i = 0; i < perceptrons.size(); i++){
+
+            double output = perceptrons.get(i).compute(inputV);
+
+            if (output > maxOut){
+                maxOut = output;
+                predictedIndex = i;
+            }
+        }
+        if (predictedIndex != -1){
+
+            return languages.get(predictedIndex);
+        }
+
+        return "Nie ma takiego i elo";
+    }
 
 
 
