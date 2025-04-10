@@ -41,7 +41,7 @@ public class TeacherUpdated {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] tokens = line.split(",",2);
-                if (tokens.length != 2) {
+                if (tokens.length == 2) {
 
                     String language = tokens[0].trim().replace("\"","");
                     String text = tokens[1].trim().replace("\"","");

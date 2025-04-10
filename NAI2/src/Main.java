@@ -8,24 +8,37 @@ public class Main {
     public static void main(String[] args) {
 
 
-        String learnFiles = "perceptron.data";
-        String testFiles = "perceptron.test.data";
-
-        // do testowania
-        String learnFilesMulti = "NAI2/perceptron.multiple.data";
-        String testFilesMulti = "NAI2/perceptron.test.multiple.data";
+        String trainFilePath = "data/lang.train.csv";
+        String testFilePath = "data/lang.test.csv";
 
 
+        List<String> langs = List.of("Polish", "English", "Spanish", "German");
 
+        double learningRate = 0.01;
         int epochs = 100;
-        Teacher teacher = new Teacher(learnFilesMulti, testFilesMulti, epochs);
-        teacher.teachPerceptron();
-        double accuracy = teacher.testPerceptron();
+
+        TeacherUpdated tu = new TeacherUpdated(langs, learningRate);
+
+        try {
+
+            List<DataForLanguage> trainData = tu.loadData(trainFilePath);
+            System.out.println("Wczytano " + trainData.size() + " przykladow testowych");
+
+            List<DataForLanguage> testData = tu.loadData(testFilePath);
+            System.out.println("Wczytano " + testData.size() + " przykladow");
 
 
-        System.out.println("[ Accuracy " + accuracy + " % ]");
-        System.out.println();
-        teacher.runEvaluator(testFilesMulti);
+            // treningujemy
+
+            tu.trainData(trainData, epochs);
+            tu.evaluate(testData);
+
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 }
