@@ -8,11 +8,12 @@ public class Main {
     public static void main(String[] args) {
 
 
-        String trainFilePath = "data/lang.train.csv";
-        String testFilePath = "data/lang.test.csv";
+        String trainFilePath = "data/lang.train.more.csv";
+        String testFilePath = "data/lang.test.more.csv";
 
 
-        List<String> langs = List.of("Polish", "English", "Spanish", "German");
+        List<String> langs = List.of("Polish", "English", "Spanish", "German","French");
+//        List<String> langs = List.of("Polish", "English", "Spanish", "German");
 
         double learningRate = 0.01;
         int epochs = 100;
