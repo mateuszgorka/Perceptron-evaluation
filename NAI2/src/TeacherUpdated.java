@@ -71,9 +71,6 @@ public class TeacherUpdated {
 
             int erorrsInEpoch = 0;  // -> do debuggowania
 
-            //Collections.shuffle(trainingData); // -> mieszamy zeby siec nie uczyla sie kolejnosci tylko faktycznie dososowywala wagi
-
-
 
             for (DataForLanguage data : trainingData) {
 
@@ -93,14 +90,41 @@ public class TeacherUpdated {
 
 
 
+                // teraz bedziemy iterowac przez wszystkie perceptrony [X]
 
+
+                for (int i = 0; i < perceptrons.size(); i++) {
+
+                    Perceptron perceptron = perceptrons.get(i);
+
+
+                    // teraz obliczamy prog aktywacji i elo (compute)
+                    double activation = perceptron.compute(input);
+
+                    // -> sprawdzamy ziomeczki czy perceptron dał najwyzsze wyjscie do tej pory
+                    if (activation > maxOutputForPrediction) {
+                        maxOutputForPrediction = activation;
+                        predictedIndexForErrorCount = i;
+                    }
+
+
+                    double targetedValue = (i == targetedIndex) ? 1 : 0; // -> wartosc docelowa dla i-tego perceptronu
+
+                    double error = targetedValue - activation;              // -> blad to roznica miedzy oczekiwana a uzskana
+
+                    // -> mamy input i blad wiec mozemy dostoswac wagi learnem
+
+                    perceptron.learn(input, error);
+
+                    if (predictedIndexForErrorCount != targetedIndex) {
+                        erorrsInEpoch++;
+                    }
+                }
             }
-
-
-
+            System.out.println(epoch + " zakonczona - liczba bledow " + erorrsInEpoch);
         }
 
-
+        System.out.println("Trening ended");
     }
 
 
