@@ -16,10 +16,7 @@ public class Main {
         String testFilesMulti = "NAI2/perceptron.test.multiple.data";
 
 
-//        System.out.print("Wpisz wartosc epok: ");
-//        Scanner scan = new Scanner(System.in);
-//        int epochs = scan.nextInt();
-//
+
         int epochs = 100;
         Teacher teacher = new Teacher(learnFilesMulti, testFilesMulti, epochs);
         teacher.teachPerceptron();

@@ -160,6 +160,97 @@ public class TeacherUpdated {
     }
 
 
+    // dobra jeszcze chcemy wpisac evaluator -> wypisywanie macierzy itp itd
+    public void evaluate(List<DataForLanguage> testData){
 
+
+
+
+        int numClasses = languages.size();
+        int[][] confusionMatrix = new int[numClasses][numClasses];
+        int correctPredictions = 0;
+        int totalPredictions = testData.size();
+
+
+
+
+        for (DataForLanguage data : testData) {
+            String actualLanguage = data.getLanguage();
+            String text = data.getText();
+            String predictedLanguage = preditction(text);
+
+            int actualIndex = languageLabels.get(actualLanguage);
+            int predictedIndex = languageLabels.getOrDefault(predictedLanguage, -1);
+
+            if (predictedIndex != -1) {
+                confusionMatrix[actualIndex][predictedIndex]++;
+            }
+
+            if (actualLanguage.equals(predictedLanguage)) {
+                correctPredictions++;
+            }
+        }
+
+
+        double overallAccuracy = (totalPredictions > 0) ? (double) correctPredictions / totalPredictions * 100.0 : 0.0;
+
+
+
+        double[] precision = new double[numClasses];
+        double[] recall = new double[numClasses];
+        double[] fScale = new double[numClasses];
+
+
+        // _> obliczanie mordeczko Precision, Recall, F-scale dla każdej klasy
+
+        for (int i = 0; i < numClasses; i++) {
+            double tp = confusionMatrix[i][i];
+            double fp = 0;
+            double fn = 0;
+
+            for (int j = 0; j < numClasses; j++) {
+                if (j != i) {
+                    fp += confusionMatrix[j][i];
+                    fn += confusionMatrix[i][j];
+                }
+            }
+
+            precision[i] = (tp + fp) > 0 ? tp / (tp + fp) : 0;
+            recall[i] = (tp + fn) > 0 ? tp / (tp + fn) : 0;
+            fScale[i] = (precision[i] + recall[i]) > 0 ? 2 * precision[i] * recall[i] / (precision[i] + recall[i]) : 0;
+        }
+
+
+        double macroAvgPrecision = 0;
+        double macroAvgRecall = 0;
+        double macroAvgFScore = 0;
+
+
+        for (int i = 0; i < numClasses; i++) {
+            macroAvgPrecision += precision[i];
+            macroAvgRecall += recall[i];
+            macroAvgFScore += fScale[i];
+
+        }
+
+
+        macroAvgPrecision /= numClasses;
+        macroAvgRecall /= numClasses;
+        macroAvgFScore /= numClasses;
+
+
+
+        System.out.println("\n--- Wyniki Ewaluacji ---");
+
+
+        System.out.printf("Ogólna Dokładność (Accuracy): %.2f%% (%d/%d)\n", overallAccuracy, correctPredictions, totalPredictions);
+        System.out.println("\nMiary Makro-średnie:");
+
+
+        System.out.printf("  Macro Avg Precision: %.4f\n", macroAvgPrecision);
+        System.out.printf("  Macro Avg Recall:    %.4f\n", macroAvgRecall);
+        System.out.printf("  Macro Avg F1-Score:  %.4f\n", macroAvgFScore);
+
+    }
 
 }
